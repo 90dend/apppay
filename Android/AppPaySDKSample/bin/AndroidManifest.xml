@@ -17,10 +17,10 @@
         android:icon="@drawable/ic_launcher" >
         <meta-data
             android:name="mId"
-            android:value="1" />
+            android:value="8" />
         <meta-data
             android:name="authKey"
-            android:value="NokXzFcgWQHnffqc7YbZnNeR3fmAHq0u" />
+            android:value="ROd5B7fMIv8jx1uO9biLXdRDHxxxgQK8" />
 
         <activity
             android:name="apppay.sdk.apppaysdksample.MainActivity"
@@ -32,6 +32,8 @@
             </intent-filter>
         </activity>
         <activity android:name="android.sdk.apppay.AppPaySDKActivity" >
+        </activity>
+        <activity android:name="android.sdk.apppay.AppPaySplashActivity" >
         </activity>
         <activity android:name="android.sdk.apppay.AppPayFormActivity" >
         </activity>

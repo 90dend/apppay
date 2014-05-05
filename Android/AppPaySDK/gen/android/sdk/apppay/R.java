@@ -25,6 +25,7 @@ public final class R {
         public static int ic_launcher=0x7f020000;
     }
     public static final class id {
+        public static int RelativeLayout1=0x7f060011;
         public static int cardNum=0x7f060006;
         public static int checkBtn=0x7f06000f;
         public static int container=0x7f060000;
@@ -33,7 +34,9 @@ public final class R {
         public static int editLabel=0x7f060002;
         public static int exYear=0x7f06000a;
         public static int expMonth=0x7f060008;
+        public static int imageView1=0x7f060012;
         public static int pic=0x7f060001;
+        public static int progressBar1=0x7f060013;
         public static int submit=0x7f06000e;
         public static int submitBtn=0x7f060004;
         public static int textView1=0x7f060005;
@@ -47,6 +50,7 @@ public final class R {
         public static int activity_app_pay_sdk=0x7f030000;
         public static int activity_bm_app_pay=0x7f030001;
         public static int activity_order_activity=0x7f030002;
+        public static int activity_splash=0x7f030003;
     }
     public static final class string {
         public static int action_settings=0x7f050002;

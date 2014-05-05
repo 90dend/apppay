@@ -37,10 +37,9 @@ public class AppPayRequest {
 		try {
 
 			inputStream = new DefaultHttpClient()
-					.execute(
-							new HttpGet(
-									"http://f-2-f.net/app.php/api/currentdate"))
+					.execute(new HttpGet("http://apppay.ru/api/currentdate"))
 					.getEntity().getContent();
+
 		} catch (Exception exception) {
 		}
 
@@ -61,7 +60,6 @@ public class AppPayRequest {
 
 			result = stringBuilder.toString();
 		} catch (IOException convertException) {
-
 		}
 
 		return result;
@@ -78,8 +76,7 @@ public class AppPayRequest {
 
 		try {
 			HttpClient httpclient = new DefaultHttpClient();
-			HttpPost httppost = new HttpPost(
-					"http://f-2-f.net/app.php/api/form");
+			HttpPost httppost = new HttpPost("http://apppay.ru/api/form");
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);
 			nameValuePairs.add(new BasicNameValuePair("amount", params
 					.getString("amount")));
@@ -90,6 +87,8 @@ public class AppPayRequest {
 			nameValuePairs.add(new BasicNameValuePair("appId", "2"));
 			nameValuePairs.add(new BasicNameValuePair("date", params
 					.getString("date")));
+
+			Log.d("form params", nameValuePairs.toString());
 
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
@@ -128,8 +127,7 @@ public class AppPayRequest {
 
 		try {
 			HttpClient httpclient = new DefaultHttpClient();
-			HttpPost httppost = new HttpPost(
-					"http://f-2-f.net/app.php/api/check");
+			HttpPost httppost = new HttpPost("http://apppay.ru/api/check");
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
 			nameValuePairs.add(new BasicNameValuePair("order", params
 					.getString("order")));

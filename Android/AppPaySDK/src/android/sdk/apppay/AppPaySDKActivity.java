@@ -9,7 +9,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.sdk.tasks.CryptTask;
 import android.sdk.tasks.GetTimeTask;
 import android.sdk.tasks.PostFormRequest;
 import android.util.Log;
@@ -26,27 +28,41 @@ public class AppPaySDKActivity extends Activity {
 	private transient EditText valueEdit;
 	private transient String date = "";
 	private transient String hash = "";
-	private Bundle extras;
+	private transient Bundle extras;
+	private transient SharedPreferences preference;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_app_pay_sdk);
-		extras = getIntent().getExtras();
+		extras = getIntent().getExtras().getBundle("extras");
+
+		preference = getSharedPreferences("AppPaySDKPref", MODE_PRIVATE);
 
 		submitBtn = (Button) findViewById(R.id.submitBtn);
 		valueEdit = (EditText) findViewById(R.id.valueEdit);
 
 		StringBuilder builder = new StringBuilder();
-		GetTimeTask getTimeTask = new GetTimeTask(AppPaySDKActivity.this);
-		getTimeTask.execute();
-		try {
-			date = getTimeTask.get();
-		} catch (InterruptedException | ExecutionException e) {
+		if (preference.getString("timestamp", "").equals("")) {
+			GetTimeTask getTimeTask = new GetTimeTask(AppPaySDKActivity.this);
+			getTimeTask.execute();
+			try {
+				date = getTimeTask.get();
+			} catch (InterruptedException | ExecutionException e) {
+				e.printStackTrace();
+			}
+		} else {
+			date = preference.getString("timestamp", "");
 		}
+
 		builder.append(extras.getString("mId")).append(":").append(date)
 				.append(":").append(extras.getString("authKey"));
-		hash = BCrypt.hashpw(builder.toString(), BCrypt.gensalt(12));
+		CryptTask cryptTask = new CryptTask();
+		cryptTask.execute(builder.toString());
+		try {
+			hash = cryptTask.get();
+		} catch (InterruptedException | ExecutionException e1) {
+		}
 
 		Log.d("date", date);
 		Log.d("hash", hash);
@@ -85,7 +101,8 @@ public class AppPaySDKActivity extends Activity {
 							&& Integer.parseInt(summ) > 0
 							&& summ.matches("\\d+")) {
 						Bundle paramsBundle = new Bundle();
-						paramsBundle.putString("merchantId", "1");
+						paramsBundle.putString("merchantId",
+								extras.getString("mId"));
 						paramsBundle.putString("authKey", hash);
 						paramsBundle.putString("amount", valueEdit
 								.getEditableText().toString());
@@ -178,6 +195,11 @@ public class AppPaySDKActivity extends Activity {
 		Log.d("par", params.getString("fields"));
 		startActivity(new Intent(AppPaySDKActivity.this,
 				AppPayFormActivity.class).putExtra("params", params));
+	}
+
+	@Override
+	public void onBackPressed() {
+		finish();
 	}
 
 }

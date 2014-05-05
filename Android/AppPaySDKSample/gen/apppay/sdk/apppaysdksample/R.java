@@ -27,6 +27,7 @@ public final class R {
         public static final int logo=0x7f020001;
     }
     public static final class id {
+        public static final int RelativeLayout1=0x7f060011;
         public static final int cardNum=0x7f060006;
         public static final int checkBtn=0x7f06000f;
         public static final int container=0x7f060000;
@@ -35,7 +36,9 @@ public final class R {
         public static final int editLabel=0x7f060002;
         public static final int exYear=0x7f06000a;
         public static final int expMonth=0x7f060008;
+        public static final int imageView1=0x7f060012;
         public static final int pic=0x7f060001;
+        public static final int progressBar1=0x7f060013;
         public static final int submit=0x7f06000e;
         public static final int submitBtn=0x7f060004;
         public static final int textView1=0x7f060005;
@@ -50,6 +53,7 @@ public final class R {
         public static final int activity_bm_app_pay=0x7f030001;
         public static final int activity_main=0x7f030002;
         public static final int activity_order_activity=0x7f030003;
+        public static final int activity_splash=0x7f030004;
     }
     public static final class string {
         public static final int action_settings=0x7f050002;

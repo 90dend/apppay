@@ -29,7 +29,7 @@ public class AppPaySDKHelper {
 			authKey = applicationInfo.metaData.getString("authKey");
 		} catch (NameNotFoundException e) {
 		}
-		context.startActivity(new Intent(context, AppPaySDKActivity.class)
+		context.startActivity(new Intent(context, AppPaySplashActivity.class)
 				.putExtra("picName", picName)
 				.putExtra("packName", context.getPackageName())
 				.putExtra("bgColor", bgColor).putExtra("editLabel", editLabel)
